@@ -50,20 +50,19 @@
               <!-- <span class="col" style="color: #2e37a4; font-size: large;">Choose specialty</span> -->
 
               <input  class="col" style=" border: none; width: auto;" matInput placeholder="Ex. Doctor strange" value="">
-
-
-
             </div>
           </div>
         </mat-button-toggle>
         <mat-button-toggle
-          style="width: 20%;text-align: center; background-size: cover; background-color: #00d3c7; height: 100% !important ;display: flex;"
-          value="hghghgh">
-          <div style=" color: aliceblue;">
-            <i class="fa fa-search" style="color: white; font-size: x-large;" aria-hidden="true"></i>
-            <span style="font-size: x-large;"> Search</span>
-          </div>
-        </mat-button-toggle>
+        style="width: 20%;text-align: center; background-size: cover; background-color: #00d3c7; height: 100% !important ;display: flex;"
+        value="hghghgh"
+        (click)="navigateToSearch()">
+        <div style=" color: aliceblue;">
+          <i class="fa fa-search" style="color: white; font-size: x-large;" aria-hidden="true"></i>
+          <span style="font-size: x-large;"> Search</span>
+        </div>
+      </mat-button-toggle>
+      
       </mat-button-toggle-group>
     </div>
   </div>
@@ -72,6 +71,9 @@
 <mat-menu #spichalistmenu="matMenu" yPosition="below">
   <div  class="row"  style="width: 40% !important; height: 30% !important; min-width: 30% !important; min-height: 100px !important; overflow-y: auto;">
     <button *ngFor="let item of specialties" class="col-6" mat-menu-item>{{item}}</button>
+    <button *ngFor="let item of specialties" class="col-6" mat-menu-item>{{item}}</button>
+    <button *ngFor="let item of specialties" class="col-6" mat-menu-item>{{item}}</button>
+
   </div>
 </mat-menu>
 <mat-menu #governatestmenu="matMenu" yPosition="below">

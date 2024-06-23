@@ -5,6 +5,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import { MatMenu } from '@angular/material/menu'; // Import MatMenu if needed
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,6 +15,8 @@ import { MatMenu } from '@angular/material/menu'; // Import MatMenu if needed
 })
 export class DoctorSearchComponent implements OnInit {
   public routes = routes;
+
+
   hideSingleSelectionIndicator = signal(false);
   value = 'Clear me';
   selected='';
@@ -93,13 +96,14 @@ export class DoctorSearchComponent implements OnInit {
   selectedCity: string = '';
   selectedArea: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  searchDoctor(): void {
+  navigateToSearch(): void {
     // Placeholder for search functionality
+    this.router.navigate(['/home/home-page'], { queryParams: { selectedSpecialty : `${this.selectedSpecialty}` } });
     console.log(`Searching for ${this.selectedSpecialty} doctor in ${this.selectedCity} / ${this.selectedArea}`);
   }
 }
