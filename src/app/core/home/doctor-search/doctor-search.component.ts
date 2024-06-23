@@ -6,6 +6,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatIconModule} from '@angular/material/icon';
 import { MatMenu } from '@angular/material/menu'; // Import MatMenu if needed
 import { Router } from '@angular/router';
+import { HttpService } from 'src/services/http/http.service';
 
 
 @Component({
@@ -15,95 +16,75 @@ import { Router } from '@angular/router';
 })
 export class DoctorSearchComponent implements OnInit {
   public routes = routes;
-
-
-  hideSingleSelectionIndicator = signal(false);
-  value = 'Clear me';
-  selected='';
-
-  // foods = [
-  //   { value: 'option1', viewValue: 'Option 1' },
-  //   { value: 'option2', viewValue: 'Option 2' },
-  //   { value: 'option3', viewValue: 'Option 3' }
-  // ];
-  // specialties = ['Specialty 1', 'Specialty 2', 'Specialty 3'];
-  // governates = ['Governate 1', 'Governate 2', 'Governate 3'];
-  // areas = ['Area 1', 'Area 2', 'Area 3'];
   searchByName: string='';
 
-
-
-  selectSpecialty(specialty: string) {
-    // Handle selected specialty
-    console.log('Selected Specialty:', specialty);
-  }
-
-  selectGovernate(governate: string) {
-    // Handle selected governate
-    console.log('Selected Governate:', governate);
-  }
-
-  selectArea(area: string) {
-    // Handle selected area
-    console.log('Selected Area:', area);
-  }
 
   search() {
     // Handle search action
     console.log('Searching for:', this.searchByName);
   }
-  selectedFood: string=''; // Property to bind selected value
-  specialties: string[] = [
-    'Cardiology',
-    'Dermatology',
-    'Endocrinology',
-    'Gastroenterology',
-    'Neurology',
-    'Oncology',
-    'Ophthalmology',
-    'Orthopedics',
-    'Psychiatry',
-    'Urology',
-  ];
+  selectSpeaclities: any = [];
+  selectCities: any = [];
+  selectAreas:any= [];
 
-  cities: string[] = [
-    'New York',
-    'Los Angeles',
-    'Chicago',
-    'Houston',
-    'Philadelphia',
-    'Phoenix',
-    'San Antonio',
-    'San Diego',
-    'Dallas',
-    'San Jose',
-  ];
+  selectedArea:any;
+  selectedCity:any;
+  selectedSpeaclity:any;
 
-  areas: string[] = [
-    'Manhattan',
-    'Brooklyn',
-    'Queens',
-    'The Bronx',
-    'Staten Island',
-    'Downtown',
-    'Midtown',
-    'Uptown',
-    'West Side',
-    'East Side',
-  ];
-
-  selectedSpecialty: string = '';
-  selectedCity: string = '';
-  selectedArea: string = '';
-
-  constructor(private router: Router) { }
+  constructor(private router: Router,public http:HttpService) { }
 
   ngOnInit(): void {
+    this.http.get('City/GetCitiesWithCountryID?c_id=887').subscribe(cities => {
+      console.log(cities);
+      this.selectCities = cities;
+    });
+
+  // this.http.get('Area/GetAllAreas').subscribe(areas =>{
+  //   console.log(areas);
+  //   this.selectAreas = areas;
+  //   });
+
+  
+  this.http.get('Major/GetAllMajors').subscribe(specalizations =>{
+    console.log(specalizations);
+    this.selectSpeaclities = specalizations;
+  });
   }
 
   navigateToSearch(): void {
     // Placeholder for search functionality
-    this.router.navigate(['/home/home-page'], { queryParams: { selectedSpecialty : `${this.selectedSpecialty}` } });
-    console.log(`Searching for ${this.selectedSpecialty} doctor in ${this.selectedCity} / ${this.selectedArea}`);
+    // this.router.navigate(['/home/home-page'], { queryParams: { selectedSpecialty : `${this.selectedSpecialty}` } });
+    console.log(`Searching for ${JSON.stringify( this.selectedSpeaclity)} doctor in ${this.selectedCity} / ${this.selectedArea}`);
+  }
+  onSpeaclitSelected(item:any){
+    this.selectedSpeaclity=item//.majorId;
+    console.log(item)
+    //console.log(item.majorId)
+    //console.log(item.cityId)
+    //console.log(item.areaId)
+  }
+  onCitySelected(item:any){
+    this.selectedCity=item//.cityId;
+
+    if(this.selectedCity)
+      {
+        this.http.get('Area/GetAreaWithCityID?city_id='+this.selectedCity.cityId).subscribe(data => {
+          console.log(data);  
+          this.selectAreas = data;
+        });
+      }else{
+        this.selectAreas = [];
+      }
+    console.log(item)
+    //console.log(item.majorId)
+    //console.log(item.cityId)
+    //console.log(item.areaId)
+  }
+  onAreaSelected(item:any){
+    this.selectedArea=item//.areaId;
+    console.log(item)
+    //console.log(item.majorId)
+    //console.log(item.cityId)
+    //console.log(item.areaId)
   }
 }
