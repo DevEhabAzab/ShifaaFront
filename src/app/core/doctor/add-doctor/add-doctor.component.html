@@ -1,0 +1,226 @@
+<div class="page-wrapper">
+    <div class="content">
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="routes.doctorsList">Person </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Add Person</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <form #form="ngForm" (ngSubmit)="onSubmitForm(form)">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Person Details</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="name">Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" ngModel name="pname" id="pname" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="mobile">Mobile <span class="login-danger">*</span></label>
+                                        <input class="form-control" ngModel id="mobile" name="mobile" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="user">User Name <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="">
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="mobile">Mobile <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="">
+                                    </div>
+                                </div> -->
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="email">Email <span class="login-danger">*</span></label>
+                                        <input class="form-control" ngModel id="email" name="email" type="email" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="Password">Password <span class="login-danger">*</span></label>
+                                        <input class="form-control" ngModel id="password" name="password" type="password" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="confirmpassword">Confirm Password <span class="login-danger">*</span></label>
+                                        <input class="form-control" ngModel id="confirmpassword" name="confirmpassword" type="password" placeholder="">
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="birth">Date Of Birth <span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" type="text" placeholder="" matInput
+                                            [matDatepicker]="picker">
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group select-gender">
+                                        <label for="gender" class="gen-label">Gender<span class="login-danger">*</span></label>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" name="gender" class="form-check-input">Male
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" name="gender" class="form-check-input">Female
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="education">Education <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="">
+                                    </div>
+                                </div> -->
+                                    <!-- <div class="col-12 col-md-6 col-xl-4">
+                                        <div class="form-group local-forms">
+                                            <label for="designation">Designation <span class="login-danger">*</span></label>
+                                            <input class="form-control" type="text" placeholder="">
+                                        </div>
+                                    </div> -->
+                                <div class="col-12 col-md-6 col-xl-4">
+                                    <div class="form-group local-forms">
+                                        <label for="degree">Degree <span class="login-danger">*</span></label>
+                                        
+                                        <mat-select [(ngModel)]="selectedDegree" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Degree">
+                                            <mat-option *ngFor="let data of selectDegrees" [value]="data.degreeId">
+                                            {{data.degreeName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 col-sm-12">
+                                    <div class="form-group local-forms">
+                                        <label for="address">Address <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" rows="3" cols="30"></textarea>
+                                    </div>
+                                </div> -->
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="country">Country <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedCountry" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Nationality">
+                                            <mat-option *ngFor="let data of selectCountries" [value]="data.countryKey">
+                                            {{data.countryName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="Type">Type <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedType" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Type">
+                                            <mat-option *ngFor="let data of selectTypes" [value]="data.typeId">
+                                            {{data.typeName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="title">Title <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedTitle" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Title">
+                                            <mat-option *ngFor="let data of selectTitles" [value]="data.titleId">
+                                            {{data.titleName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="title">Title <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedJob" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Job">
+                                            <mat-option *ngFor="let data of selectJobs" [value]="data.jobId">
+                                            {{data.jobName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="title">Title <span class="login-danger">*</span></label>
+                                        <mat-select [(ngModel)]="selectedMajor" [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Major">
+                                            <mat-option *ngFor="let data of selectMajors" [value]="data.majorId">
+                                            {{data.majorName}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-12 col-md-6 col-xl-3">
+                                    <div class="form-group local-forms">
+                                        <label for="postalcode">Postal Code <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12">
+                                    <div class="form-group local-forms">
+                                        <label for="biography">Start Biography <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" rows="3" cols="30"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-top-form">
+                                        <label for="Avatar " class="local-top">Avatar <span class="login-danger">*</span></label>
+                                        <div class="settings-btn upload-files-avator">
+                                            <input type="file" accept="image/*" name="image" id="file"
+                                                onchange="loadFile(event)" class="hide-input">
+                                            <label for="file" class="upload">Choose File</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group select-gender">
+                                        <label for="Avatar" class="gen-label">Status <span class="login-danger">*</span></label>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" name="gender" class="form-check-input">Active
+                                            </label>
+                                        </div>
+                                        <div class="form-check-inline">
+                                            <label class="form-check-label">
+                                                <input type="radio" name="gender" class="form-check-input">In Active
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="submit" class="btn btn-primary submit-form me-2">Submit</button>
+                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

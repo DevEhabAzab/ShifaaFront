@@ -1,0 +1,157 @@
+<div class="page-wrapper">
+  <div class="content">
+    <!-- Page Header -->
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12">
+          <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a [routerLink]="routes.home">Home</a></li>
+            <li class="breadcrumb-item"><i class="feather icon icon-chevron-right"></i></li>
+            <li class="breadcrumb-item active">Home</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /Page Header -->
+
+    <!-- Search Filters -->
+    <div class="row mb-3">
+      <div class="col-12">
+        <h3 class="mb-0">Search</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>City</mat-label>
+          <mat-select [(value)]="selectedCity" [(ngModel)]="selectedCity" (selectionChange)="onCityChange()">
+            <mat-option  [value]="">
+            </mat-option>
+            <mat-option *ngFor="let city of selectCities" [value]="city.cityId">
+              {{city.cityName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>Area</mat-label>
+          <mat-select [(value)]="selectedArea">
+            <mat-option  [value]="">
+            </mat-option>
+            <mat-option *ngFor="let area of selectAreas" [value]="area.areaId">
+              {{area.areaName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field appearance="fill">
+          <mat-label>Specialty</mat-label>
+          <mat-select [(value)]="selectedSpeaclity">
+            <mat-option  [value]="">
+            </mat-option>
+            <mat-option *ngFor="let specialty of selectSpeaclities" [value]="specialty.majorId">
+              {{specialty.majorName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-md-3 d-flex align-items-center">
+        <button type="submit" class="btn btn-primary submit-form me-2" (click)="search()">Search</button>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col-12">
+        <h3 class="mb-0">Doctor Cards</h3>
+      </div>
+    </div>
+    <!-- Conditional Rendering for Doctors -->
+    <div *ngIf="pagedDocs && pagedDocs.length > 0; else noDocs">
+      <div class="row">
+        <div class="col-sm-12" *ngFor="let data of pagedDocs">
+          <div class="blog grid-blog card">
+            <a [routerLink]="routes.addAppointment" [queryParams]="{id:data.rowId}" class="stretched-link">
+              <div class="card-content d-flex">
+                <div class="left-content">
+                  <img class="img-fluid" [src]="" alt="">
+                  <div class="blog-views">
+                    <h4>Dr. {{data.persoonName}} </h4>
+                  </div>
+                  <ul class="nav view-blog-list blog-views">
+                    <!-- Additional info here -->
+                  </ul>
+                  <div class="blog-content">
+                    <div class="blog-grp-blk">
+                      <div class="blog-img-blk">
+                        <a [routerLink]="routes.profile"><img class="img-fluid" [src]="" alt=""></a>
+                        <div class="content-blk-blog ms-2">
+                          <div class="d-flex py-2">
+                            <span class="doctor-logo">
+                              <i class="fa-solid fa-pen-fancy" style="margin-right: 15px;"></i>
+                            </span>
+                            <h4 style="margin-bottom: 10px;">{{data.majorName}}</h4>
+                          </div>
+                          <div class="d-flex py-2">
+                            <span class="doctor-logo">
+                              <i class="fa-solid fa-medal" style="margin-right: 15px;"></i>
+                            </span>
+                            <h4 style="margin-bottom: 10px;">{{data.degreeName}}</h4>
+                          </div>
+                          <div class="d-flex py-2">
+                            <span class="doctor-logo">
+                              <i class="fa-solid fa-money-bill" style="margin-right: 15px;"></i>
+                            </span>
+                            <h4 style="margin-bottom: 10px;">{{data.visitingPrice}}</h4>
+                          </div>
+                          <div class="d-flex py-2">
+                            <span class="doctor-logo">
+                              <i class="fa-solid fa-location-dot" style="margin-right: 15px;"></i>
+                            </span>
+                            <h4 style="margin-bottom: 10px;">{{data.centerName}}</h4>
+                          </div>
+                          <div class="d-flex py-2">
+                            <span class="doctor-logo">
+                              <i class="fa-solid fa-location-arrow" style="margin-right: 15px;"></i>
+                            </span>
+                            <h4 style="margin-bottom: 10px;">{{data.centerAddress}}</h4>
+                          </div>
+                          <div class="d-flex py-2">
+                            <span class="doctor-logo">
+                              <i class="fa-solid fa-mobile-retro" style="margin-right: 15px;"></i>
+                            </span>
+                            <h4 style="margin-bottom: 10px;">{{data.centerMobile}}</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="right-content ms-auto">
+                  <div *ngIf="data.TimeSlots && data.TimeSlots.length > 0">
+                    <h4>Time Slots:</h4>
+                    <ul>
+                      <li *ngFor="let slot of data.TimeSlots">
+                        {{ slot.dateKey }}
+                        <div *ngFor="let timDim of slot.TimeDim">
+                          {{ timDim.timeHh }} : {{timDim.timeMm}}
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Enhanced Paginator -->
+      <mat-paginator [length]="pagedDocs.length" [pageSize]="pageSize" (page)="onPageChange($event)"
+        [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+    <ng-template #noDocs>
+      <p>No doctors available.</p>
+    </ng-template>
+  </div>
+</div>

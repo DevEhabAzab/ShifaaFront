@@ -1,0 +1,129 @@
+<div class="page-wrapper">
+    <div class="content">
+    
+        <!-- Page Header -->
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-12">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a [routerLink]="routes.addSpecalist">Assign Speaclist </a></li>
+                        <li class="breadcrumb-item"><i class="feather icon-chevron-right"></i></li>
+                        <li class="breadcrumb-item active">Add Speaclist</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- /Page Header -->
+        <div class="row">
+            <div class="col-sm-12">
+            
+                <div class="card">
+                    <div class="card-body">
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)"> 
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-heading">
+                                        <h4>Add Speaclist</h4>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12">  
+                                    <div class="form-group local-forms">
+                                        <label for="price">Visting Price <span class="login-danger">*</span></label>
+                                        <input required class="form-control" ngModel  id="price" name="price" type="text" >
+                                    </div>
+                                </div>
+                                
+                                <!-- <div class="col-12 col-md-6 col-xl-6">  
+                                    <div class="form-group local-forms">
+                                        <label  for="Centerhead">Center Head <span class="login-danger">*</span></label>
+                                        <input class="form-control" type="text" >
+                                    </div>
+                                </div> -->
+                                <!-- <div class="col-12 col-sm-12">
+                                    <div class="form-group local-forms">
+                                        <label for="description">Description  <span class="login-danger">*</span></label>
+                                        <textarea class="form-control" ngModel  id="desc" name="desc" rows="3" cols="30"></textarea>
+                                    </div>
+                                </div> -->
+                      
+                              
+                                
+                                <!-- <div class="col-12 col-md-6 col-xl-6">
+                                    <div class="form-group local-forms">
+                                        <label for="date">Center Date  <span class="login-danger">*</span></label>
+                                        <input class="form-control datetimepicker" type="text" matInput  [matDatepicker]="picker" >
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                    </div>
+                                </div> -->
+
+                                <div class="form-group">
+                                    <label for="Center">Center:</label>
+                                    <mat-select [(ngModel)]="selectedCenter" required [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Type">
+                                        <mat-option *ngFor="let data of selectCenters" [value]="data.centerId">
+                                        {{data.centerName }}  
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="Type">Type:</label>
+                                    <mat-select [(ngModel)]="selectedValue" required [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Type">
+                                        <mat-option *ngFor="let data of selectedType" [value]="data.typeId">
+                                        {{data.typeName }}  
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="TimeFrom">Time From:</label>
+                                    <mat-select [(ngModel)]="selectedTimeFrom" required [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Time">
+                                        <mat-option *ngFor="let data of selectTimes" [value]="data.timeKey">
+                                        {{data.timeHh }} : {{data.timeMm}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="TimeTo">Time To:</label>
+                                    <mat-select [(ngModel)]="selectTimeTo" required [ngModelOptions]="{standalone: true}" class="form-control select"  placeholder="Select Time">
+                                        <mat-option *ngFor="let data of selectTimes" [value]="data.timeKey">
+                                            {{data.timeHh }} : {{data.timeMm}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                           
+                           
+                                <div class="form-group">
+                                    <label for="Person">Assigned Person:</label>
+                                    <mat-select [(ngModel)]="contactPerson" required multiple [ngModelOptions]="{standalone: true}" required class="form-control select"  placeholder="Select Type">
+                                        <mat-option *ngFor="let data of contactPersons" [value]="data.personId">
+                                        {{data.persoonName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="Date">Date:</label>
+                                    <mat-select [(ngModel)]="selectedDay" required multiple [ngModelOptions]="{standalone: true}" required class="form-control select"  placeholder="Select Date">
+                                        <mat-option *ngFor="let data of daysOfWeek" [value]="data.dayKey">
+                                        {{data.dayName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div *ngIf="form.submitted && (!selectedValue || !selectedTimeFrom || !selectedDay || 
+                                !selectedCenter)" class="error-message">
+                                    Check that you filled all form data.
+                                  </div>
+                                <div class="col-12">
+                                    <div class="doctor-submit text-end">
+                                        <button type="submit" class="btn btn-primary submit-form me-2">Create Center</button>
+                                        <button type="submit" class="btn btn-primary cancel-form">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>							
+            </div>					
+        </div>
+    </div>
+</div>

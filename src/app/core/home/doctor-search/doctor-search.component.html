@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h1 class="card-title" style="color: aliceblue;" >Book a doctor </h1>
+      <h2 class="card-subtitle">Examination or procedure</h2>
+    </div>
+    <div class="card-content" >
+      <mat-button-toggle-group  class="toggle-group" style="height: 100px; border-radius: 20px; width: 100%;" name="fontStyle"
+        aria-label="Font Style">
+        <mat-button-toggle style="width: 20%;text-align: center;" value="bold" [matMenuTriggerFor]="spichalistmenu" >
+          <div class="col">
+            <div class="row" style="font-size: small; height: 30px; "><span class="col">Select a specialty</span> <i
+                class="fa fa-caret-down col d-flex justify-content-center align-items-center"
+                style="text-align: center;" aria-hidden="true"></i> </div>
+            <div class="row"><i class="fa fa-stethoscope col d-flex justify-content-center align-items-center"
+                style="justify-content: center; color: #2e37a4;" aria-hidden="true"></i> <span class="col"
+                style="color: #2e37a4; font-size: large;">Choose specialty</span></div>
+          </div>
+
+        </mat-button-toggle>
+        <mat-button-toggle style="width: 20%;text-align: center;" value="italic" [matMenuTriggerFor]="governatestmenu">
+          <div class="col">
+            <div class="row" style="font-size: small; height: 30px; "><span class="col">In this Governate</span> <i
+                class="fa fa-caret-down col d-flex justify-content-center align-items-center"
+                style="text-align: center;" aria-hidden="true"></i> </div>
+            <div class="row"><i class="fa fa-map-marker col d-flex justify-content-center align-items-center"
+                style="justify-content: center; color: #2e37a4;" aria-hidden="true"></i> <span class="col"
+                style="color: #2e37a4; font-size: large;">Choose Governate</span></div>
+          </div>
+        </mat-button-toggle>
+        <mat-button-toggle style="width: 20%;text-align: center;" value="italic" [matMenuTriggerFor]="ariamenu">
+          <div class="col">
+            <div class="row" style="font-size: small; height: 30px; "><span class="col">In this Area</span> <i
+                class="fa fa-caret-down col d-flex justify-content-center align-items-center"
+                style="text-align: center;" aria-hidden="true"></i> </div>
+            <div class="row"><i class="fa fa-map-marker col d-flex justify-content-center align-items-center"
+                style="justify-content: center; color: #2e37a4;" aria-hidden="true"></i> <span class="col"
+                style="color: #2e37a4; font-size: large;">Choose Area</span></div>
+          </div>
+        </mat-button-toggle>
+        <mat-button-toggle style="width: 20%;text-align: center;" value="jkjkjkjk">
+          <div class="col">
+            <div class="row" style="font-size: small; height: 30px; ">
+              <span class="col">Or search by name</span>
+              <i class="fa fa-caret-down col d-flex justify-content-center align-items-center"
+                style="text-align: center; " aria-hidden="true"></i>
+            </div>
+            <div class="row"><i class="fa fa-user-md col-1 d-flex justify-content-center align-items-center"
+                style="justify-content: center;color: #2e37a4;" aria-hidden="true"></i>
+              <!-- <span class="col" style="color: #2e37a4; font-size: large;">Choose specialty</span> -->
+
+              <input  class="col" style=" border: none; width: auto;" matInput placeholder="Ex. Doctor strange" value="">
+
+
+
+            </div>
+          </div>
+        </mat-button-toggle>
+        <mat-button-toggle
+          style="width: 20%;text-align: center; background-size: cover; background-color: #00d3c7; height: 100% !important ;display: flex;"
+          value="hghghgh">
+          <div style=" color: aliceblue;">
+            <i class="fa fa-search" style="color: white; font-size: x-large;" aria-hidden="true"></i>
+            <span style="font-size: x-large;"> Search</span>
+          </div>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+  </div>
+</div>
+
+<mat-menu #spichalistmenu="matMenu" yPosition="below">
+  <div  class="row"  style="width: 40% !important; height: 30% !important; min-width: 30% !important; min-height: 100px !important; overflow-y: auto;">
+    <button *ngFor="let item of specialties" class="col-6" mat-menu-item>{{item}}</button>
+  </div>
+</mat-menu>
+<mat-menu #governatestmenu="matMenu" yPosition="below">
+  <div  class="row"  style="width: 40% !important; height: 30% !important; min-width: 30% !important; min-height: 100px !important; overflow-y: auto;">
+    <button *ngFor="let item of cities" class="col-6" mat-menu-item>{{item}}</button>
+  </div>
+</mat-menu>
+<mat-menu #ariamenu="matMenu" yPosition="below">
+  <div  class="row"  style="width: 40% !important; height: 30% !important; min-width: 30% !important; min-height: 100px !important; overflow-y: auto;">
+    <button *ngFor="let item of areas" class="col-6" mat-menu-item>{{item}}</button>
+  </div>
+</mat-menu>

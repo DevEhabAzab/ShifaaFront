@@ -1,0 +1,96 @@
+<div class="page-wrapper">
+    <div class="content">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="routes.appointmentList">Appointment</a>
+              </li>
+              <li class="breadcrumb-item">
+                <i class="feather icon-chevron-right"></i>
+              </li>
+              <li class="breadcrumb-item active">Book Appointment</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- /Page Header -->
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-body">
+                <form #form="ngForm" (ngSubmit)="onSubmit(form)"> 
+                    <div class="row">
+                  <div class="col-12">
+                    <div class="form-heading">
+                      <h4>Patient Details</h4>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-4">
+                    <div class="form-group local-forms">
+                      <label for="name">Full Name <span class="login-danger">*</span></label>
+                      <input class="form-control" type="text" [(ngModel)]="fullName" name="fullName" required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-6">
+                    <div class="form-group local-forms">
+                      <label for="mobile">Mobile <span class="login-danger">*</span></label>
+                      <input class="form-control" type="text" name="mobile" [(ngModel)]="mobile" required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-6">
+                    <div class="form-group local-forms">
+                      <label for="email">Email </label>
+                      <input class="form-control" type="email" name="email" [(ngModel)]="email">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-heading">
+                      <h4>Appointment Details</h4>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-6">
+                    <div class="form-group local-forms">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Date</mat-label>
+                        <mat-select [(ngModel)]="selectedDateKey" (selectionChange)="onChangeDay()" [ngModelOptions]="{standalone: true}">
+                          <mat-option *ngFor="let date of combinedDates" [value]="date">
+                            {{ date }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div *ngIf="reservationDate">
+                        <small>Selected Date: {{ reservationDate }}</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6 col-xl-6">
+                    <div class="form-group local-forms">
+                      <mat-form-field appearance="fill">
+                        <mat-label>Select Time</mat-label>
+                        <mat-select [(ngModel)]="selectedTime" [ngModelOptions]="{standalone: true}">
+                          <mat-option *ngFor="let time of combinedTimeSlots" [value]="time">
+                            {{ time.timeHh }} : {{ time.timeMm }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  
+                 
+                  <div class="col-12">
+                    <div class="doctor-submit text-end">
+                      <button type="submit" class="btn btn-primary submit-form me-2">Book</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>							
+        </div>					
+      </div>
+    </div>
+  </div>
+  
