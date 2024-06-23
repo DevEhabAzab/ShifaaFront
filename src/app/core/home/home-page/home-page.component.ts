@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { routes } from 'src/app/shared/routes/routes';
 import { DataService } from 'src/app/shared/data/data.service';
 import { doctorlist, pageSelection, searchDocotr,TimeDim } from 'src/app/shared/models/models';
@@ -16,7 +16,6 @@ import { NotificationService } from 'src/services/snack/notification.service';
 export class HomePageComponent implements OnInit {
   public routes = routes;
   
-
   selectedArea:any;
   selectedCity:any;
   selectedSpeaclity:any;
