@@ -7,6 +7,8 @@ import { blogs } from 'src/app/shared/models/models';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NotificationService } from 'src/services/snack/notification.service';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
@@ -15,7 +17,7 @@ import { NotificationService } from 'src/services/snack/notification.service';
 
 export class HomePageComponent implements OnInit {
   public routes = routes;
-  
+  searchByName:string='';
   selectedArea:any;
   selectedCity:any;
   selectedSpeaclity:any;
@@ -39,7 +41,7 @@ export class HomePageComponent implements OnInit {
   public pagedDocs:Array<searchDocotr>=[];
 
   constructor(public data : DataService,public http:HttpService,private notificationService: NotificationService
-  ){
+  ,private route: ActivatedRoute){
 
   }
 
@@ -47,17 +49,28 @@ export class HomePageComponent implements OnInit {
     this.blogs = this.data.blogs;
     console.log(this.blogs);
     this.setPagedBlogs();
-    
-    this.http.get('SearchDoc/GetAll').subscribe(drList => 
-      {
-        console.log(drList);
-        this.doctorList = drList;
-        this.setPagedDoc();
-        for (const doctor of this.doctorList) {
-          this.fetchDoctorTimeSlots(doctor.rowId);
-        }
-      }
-    );
+    this.route.queryParams.subscribe(params => {
+      this.searchByName = params['drName'];
+      this.selectedArea = params['area'];
+      this.selectedSpeaclity = params['selectedSpecialty'];
+      this.selectedCity = params['gov'];
+      console.log(this.selectedCity,this.selectedSpeaclity,this.searchByName,this.selectedArea);
+      this.search();
+      // Use searchByName for your logic
+    });
+
+    // this.http.get('SearchDoc/GetAll').subscribe(drList => 
+    //   {
+    //     console.log(drList);
+    //     this.doctorList = drList;
+    //     this.setPagedDoc();
+    //     for (const doctor of this.doctorList) {
+    //       this.fetchDoctorTimeSlots(doctor.rowId);
+    //     }
+    //   }
+    // );
+
+
     this.http.get('City/GetAllCities').subscribe(cities => {
       console.log(cities);
       this.selectCities = cities;
@@ -150,9 +163,10 @@ export class HomePageComponent implements OnInit {
     const params = {
       cityId: this.selectedCity,
       areaId: this.selectedArea,
-      specialityId: this.selectedSpeaclity
+      specialityId: this.selectedSpeaclity,
+      drName:this.searchByName
     };
-
+    console.log(params);
     this.http.post('SearchDoc/GetWithFilters', params).pipe(
       catchError(error => {
         console.error('Error occurred:', error);

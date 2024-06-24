@@ -35,8 +35,7 @@ export class DoctorSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get('City/GetCitiesWithCountryID?c_id=887').subscribe(cities => {
-      console.log(cities);
-      this.selectCities = cities;
+       this.selectCities = cities;
     });
 
   // this.http.get('Area/GetAllAreas').subscribe(areas =>{
@@ -53,8 +52,26 @@ export class DoctorSearchComponent implements OnInit {
 
   navigateToSearch(): void {
     // Placeholder for search functionality
-    // this.router.navigate(['/home/home-page'], { queryParams: { selectedSpecialty : `${this.selectedSpecialty}` } });
-    console.log(`Searching for ${JSON.stringify( this.selectedSpeaclity)} doctor in ${this.selectedCity} / ${this.selectedArea}`);
+    const queryParams: any = {};
+
+    if (this.selectedSpeaclity?.majorId) {
+      queryParams.selectedSpeaclity = this.selectedSpeaclity.majorId;
+    }
+
+    if (this.selectedArea?.areaId) {
+      queryParams.area = this.selectedArea.areaId;
+    }
+
+    if (this.selectedCity?.cityId) {
+      queryParams.gov = this.selectedCity.cityId;
+    }
+
+    if (this.searchByName) {
+      queryParams.drName = this.searchByName;
+    }
+
+    this.router.navigate(['/home/home-page'], { queryParams });
+    console.log(`Searching for ${JSON.stringify( this.selectedSpeaclity)} doctor in ${this.selectedArea}`);
   }
   onSpeaclitSelected(item:any){
     this.selectedSpeaclity=item//.majorId;
