@@ -97,7 +97,8 @@ onSubmit(form: any) {
               'priceCurrency':840,
               'joinDate':todayDate,
               'joiningType':this.selectedValue,
-              'leavingDate':null
+              'leavingDate':null,
+              'changeCurrentInd':'Y'
             };
             this.http.post('PersonInCenter/AddPersonInCenter', postData)
               .subscribe(response => {

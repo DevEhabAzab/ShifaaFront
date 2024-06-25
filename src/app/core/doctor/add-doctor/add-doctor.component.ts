@@ -112,7 +112,8 @@ this.http.get('Type/GetActiveTypesPerson').subscribe(data => {
                     'personJob':this.selectedJob,
                     'personEmail':form.value.email,
                     'personNationality':this.selectedCountry,
-                    'personAspnetUserId':decodedToken.Id
+                    'personAspnetUserId':decodedToken.Id,
+                    'changeCurrentInd':'Y'
                   }
                   console.log("registration res",response);
                   console.log("person Obj",personObj);

@@ -109,7 +109,7 @@ onSubmit(form: any) {
       'contactPerson':this.contactPerson,
       'centerStatus':this.centerStatus,
       'centerType':this.selectedValue,
-      'Change_Current_Ind':'Y'
+      'changeCurrentInd':'Y'
     };
     console.log(JSON.stringify(postData))
     this.http.post('Center/AddCenter', postData)

@@ -17,10 +17,14 @@ import { ActivatedRoute } from '@angular/router';
 
 export class HomePageComponent implements OnInit {
   public routes = routes;
-  searchByName:string='';
-  selectedArea:any;
-  selectedCity:any;
-  selectedSpeaclity:any;
+
+
+  selectedCity: number | null = null;
+  selectedArea: number | null = null;
+  selectedSpeaclity: number | null = null;
+  searchByName: string = '';
+
+
   daysOfWeek = [
     { dayKey: 1, dayName: 'Monday' },
     { dayKey: 2, dayName: 'Tuesday' },
@@ -33,6 +37,9 @@ export class HomePageComponent implements OnInit {
   selectAreas:any=[];
   selectCities:any=[];
   selectSpeaclities:any=[];
+
+
+
   public doctorList:any=[];
   public blogs: Array<blogs> = [];
   public pagedBlogs: Array<blogs> = [];
@@ -52,7 +59,7 @@ export class HomePageComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.searchByName = params['drName'];
       this.selectedArea = params['area'];
-      this.selectedSpeaclity = params['selectedSpecialty'];
+      this.selectedSpeaclity = params['selectedSpeaclity'];
       this.selectedCity = params['gov'];
       console.log(this.selectedCity,this.selectedSpeaclity,this.searchByName,this.selectedArea);
       this.search();
@@ -155,7 +162,6 @@ export class HomePageComponent implements OnInit {
       }else{
         this.selectAreas = [];
       }
-
   }
 
 
@@ -166,6 +172,21 @@ export class HomePageComponent implements OnInit {
       specialityId: this.selectedSpeaclity,
       drName:this.searchByName
     };
+
+    if (this.areAllParamsEmpty(params)) {
+
+  this.http.get('SearchDoc/GetAll').subscribe(drList => 
+      {
+        console.log(drList);
+        this.doctorList = drList;
+        this.setPagedDoc();
+        for (const doctor of this.doctorList) {
+          this.fetchDoctorTimeSlots(doctor.rowId);
+        }
+      }
+    );
+       return;
+    }
     console.log(params);
     this.http.post('SearchDoc/GetWithFilters', params).pipe(
       catchError(error => {
@@ -186,5 +207,11 @@ export class HomePageComponent implements OnInit {
       }
 
     });
+  }
+
+  areAllParamsEmpty(params: any): boolean {
+    return Object.values(params).every(value => 
+      value === null || value === undefined || value === ''
+    );
   }
 }

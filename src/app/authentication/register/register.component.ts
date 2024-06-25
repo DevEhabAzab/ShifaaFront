@@ -61,7 +61,8 @@ export class RegisterComponent {
           'personJob':null,
           'personEmail':this.form.value.email,
           'personNationality':null,
-          'personAspnetUserId':decodedToken.Id
+          'personAspnetUserId':decodedToken.Id,
+          'changeCurrentInd':'Y'
 
         }
       console.log("person Obj",personObj)
