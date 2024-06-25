@@ -25,7 +25,7 @@ export class CoreComponent {
   isUserLoggedIn:boolean=false;
   constructor(private sideBar: SideBarService,public router: Router,private data: DataService,) 
   {
-    this.isUserLoggedIn=localStorage.getItem("userID")!=null;
+    this.isUserLoggedIn=localStorage.getItem('authenticated')!=null;
     this.sideBar.toggleSideBar.subscribe((res: string) => {
       if (res == 'true') {
         this.miniSidebar = 'true';

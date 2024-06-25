@@ -17,7 +17,21 @@ export class AuthService {
     private http: HttpService,
     private dialog: MatDialog
   ) {}
-
+public logout(){
+    if (localStorage.getItem('authenticated')) {
+      localStorage.removeItem('authenticated');
+    }
+    if (sessionStorage.getItem('refreshToken')) {
+      sessionStorage.removeItem('refreshToken');
+    }
+    if (localStorage.getItem('userID')) {
+      localStorage.removeItem('userID');
+    }
+    if (sessionStorage.getItem('roles')) {
+      sessionStorage.removeItem('roles');
+    }
+    this.router.navigate([routes.baseUrl]);
+}
   public login(loginData:any): void {
     this.http.post('AuthManagment/Login',loginData).subscribe(
       (response: any) => {
